@@ -15,11 +15,10 @@ async function run() {
     const deleteRemoved = core.getInput('delete-removed') || false;
     const noCache = getBooleanInput('no-cache');
     const private = getBooleanInput('private');
-    const immutable = getBooleanInput('immutable');
     const cache   = core.getInput('cache') || null;
     const filesToInclude = core.getInput('files-to-include') || null;
 
-    await deploy({ folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache, immutable, filesToInclude });
+    await deploy({ folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache, filesToInclude });
   } catch (error) {
     core.setFailed(error.message);
   }
