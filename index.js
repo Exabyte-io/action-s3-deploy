@@ -16,9 +16,7 @@ async function run() {
     const noCache = getBooleanInput('no-cache');
     const private = getBooleanInput('private');
     const immutable = getBooleanInput('immutable');
-    
-    const cacheControl = core.getInput('cacheControl');
-    const cache   = core.getInput('cache') || null;
+    const cache = core.getInput('cache') || null;
     const filesToInclude = core.getInput('files-to-include') || null;
 
     await deploy({
@@ -32,7 +30,6 @@ async function run() {
       private,
       cache,
       immutable,
-      cacheControl,
       filesToInclude,
     });
   } catch (error) {

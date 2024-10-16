@@ -14,7 +14,6 @@ let deploy = function (params) {
       private,
       cache,
       immutable,
-      cacheControl,
       filesToInclude,
     } = params;
 
@@ -28,7 +27,6 @@ let deploy = function (params) {
         : '';
     const noCacheArg = noCache ? '--noCache' : '';
     const immutableArg = immutable ? '--immutable' : '';
-    const cacheControlArg = cacheControl ? `--cacheControl ${cacheControl}` : '';
     const privateArg = private ? '--private' : '';
     const cacheFlag = cache ? `--cache ${cache}` : '';
     const filesRegex = filesToInclude ? filesToInclude : '**';
@@ -46,7 +44,6 @@ let deploy = function (params) {
                         ${deleteRemovedArg} \
                         ${noCacheArg} \
                         ${immutableArg} \
-                        ${cacheControlArg} \
                         ${privateArg} `;
 
       const cwd = path.resolve(folder);
