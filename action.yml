@@ -25,8 +25,20 @@ inputs:
   private:
     description: 'Upload files with private ACL, needed for S3 static website hosting'
     required: false
+  cache:
+    description: 'Sets the Cache-Control: max-age=X header'
+    required: false
+  immutable:
+    description: 'Sets the Cache-Control header to immutable'
+    required: false
+  cache-control:
+    description: 'Sets the Cache-Control: X header'
+    required: false
+  files-to-include:
+    description: 'Allows for a comma delineated Regex String that matches files to include in the deployment'
+    required: false
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: 'upload-cloud'
