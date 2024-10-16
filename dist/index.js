@@ -1043,9 +1043,8 @@ async function run() {
     const noCache = getBooleanInput('no-cache');
     const private = getBooleanInput('private');
     const cache   = core.getInput('cache') || null;
-    const filesToInclude = core.getInput('files-to-include') || null;
 
-    await deploy({ folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache, filesToInclude });
+    await deploy({ folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache });
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -1078,7 +1077,7 @@ const exec = __webpack_require__(986);
 
 let deploy = function (params) {
   return new Promise((resolve, reject) => {
-    const { folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache, filesToInclude } = params;
+    const { folder, bucket, bucketRegion, distId, invalidation, deleteRemoved, noCache, private, cache } = params;
 
     const distIdArg = distId ? `--distId ${distId}` : '';
     const invalidationArg = distId ? `--invalidate "${invalidation}"` : '';
@@ -1091,10 +1090,9 @@ let deploy = function (params) {
     const noCacheArg = noCache ? '--noCache' : '';
     const privateArg = private ? '--private' : '';
     const cacheFlag  = cache ? `--cache ${cache}` : '';
-    const filesRegex = filesToInclude ? filesToInclude : '**';  
 
     try {
-      const command = `npx s3-deploy@1.4.0 ./${filesRegex} \
+      const command = `npx s3-deploy@1.4.0 ./** \
                         --bucket ${bucket} \
                         --region ${bucketRegion} \
                         --cwd ./ \
